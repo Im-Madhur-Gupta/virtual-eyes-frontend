@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "virtual-eyes",
+    "slug": "virtual-eyes",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
