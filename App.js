@@ -17,7 +17,11 @@ export default function App() {
   return (
     <NativeBaseProvider>
       <NavigationContainer>
-        <Drawer.Navigator>
+        <Drawer.Navigator
+        // initialRouteName={isLoggedIn ? "Home" : "Login"}
+        useLegacyImplementation={false}
+        screenOptions={{ lazy: false }}
+        >
           {isLoggedIn ? (
             <Drawer.Screen name="Home" component={Home} />
           ) : (
