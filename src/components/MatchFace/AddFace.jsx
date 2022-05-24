@@ -18,16 +18,15 @@ const AddFace = () => {
       console.log(selectedImage.uri);
       const data = createFormData(selectedImage);
       console.log("data", data);
-      axiosInstance
-        .post("/visualize-image", data, {
-          headers: {
-            "Content-Type": `multipart/form-data`,
-            transformRequest: (data) => {
-              return data;
-            },
-            responseType: "json",
+      AxiosInstance.post("/visualize-image", data, {
+        headers: {
+          "Content-Type": `multipart/form-data`,
+          transformRequest: (data) => {
+            return data;
           },
-        })
+          responseType: "json",
+        },
+      })
         .then((res) => {
           console.log("DECRIPTION", res.data);
           setImageDescription(res.data);

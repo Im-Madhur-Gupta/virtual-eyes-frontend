@@ -20,9 +20,9 @@ export default function App() {
     <NativeBaseProvider>
       <NavigationContainer>
         <Drawer.Navigator
-        // useLegacyImplementation={true}
-        // initialRouteName={isLoggedIn ? "Home" : "Login"}
-        // screenOptions={{ lazy: false }}
+          // initialRouteName={isLoggedIn ? "Home" : "Login"}
+          useLegacyImplementation={false}
+          screenOptions={{ lazy: false }}
         >
           {isLoggedIn ? (
             <>

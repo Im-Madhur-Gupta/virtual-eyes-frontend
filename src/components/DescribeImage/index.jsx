@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
-import axiosInstance from "../../services/axiosInstance";
+import AxiosInstance from "../../services/AxiosInstance";
 import createFormData from "../../utils/createFormData";
 import openCameraImagePicker from "../../utils/openCameraImagePicker";
 import useGalleryImagePicker from "../../hooks/useGalleryImagePicker";
@@ -28,7 +28,7 @@ const DescribeImage = () => {
       // console.log(selectedImage.uri);
       // const data = createFormData(selectedImage);
       // console.log("data", data);
-      // axiosInstance
+      // AxiosInstance
       //   .post("/visualize-image", data, {
       //     headers: {
       //       "Content-Type": `multipart/form-data`,

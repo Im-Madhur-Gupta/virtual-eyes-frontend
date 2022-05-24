@@ -10,7 +10,7 @@ import {
 } from "native-base";
 
 import useLoadingSpinner from "../../hooks/useLoadingSpinner";
-import axiosInstance from "../../services/axiosInstance";
+import AxiosInstance from "../../services/AxiosInstance";
 import saveInSecureStorage from "../../utils/saveInSecureStorage";
 import useStore from "../../store/user-store";
 
@@ -41,21 +41,20 @@ const Register = () => {
 
   const registerHandler = () => {
     setShowLoadingSpinner(true);
-    axiosInstance
-      .post(
-        "/register",
-        JSON.stringify({
-          email,
-          password,
-          first_name: firstname,
-          last_name: lastname,
-        }),
-        {
-          headers: {
-            "Content-Type": `application/json`,
-          },
-        }
-      )
+    AxiosInstance.post(
+      "/register",
+      JSON.stringify({
+        email,
+        password,
+        first_name: firstname,
+        last_name: lastname,
+      }),
+      {
+        headers: {
+          "Content-Type": `application/json`,
+        },
+      }
+    )
       .then((res) => {
         setShowLoadingSpinner(false);
         console.log(res.data);
