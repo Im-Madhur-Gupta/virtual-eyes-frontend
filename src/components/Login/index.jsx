@@ -40,36 +40,36 @@ const Login = () => {
 
   const loginHandler = () => {
     setShowLoadingSpinner(true);
-    axiosInstance
-      .post(
-        "/login",
-        JSON.stringify({
-          email,
-          password,
-        }),
-        {
-          headers: {
-            "Content-Type": `application/json`,
-          },
-        }
-      )
-      .then((res) => {
-        setShowLoadingSpinner(false);
-        console.log(res.data);
-        const { email, first_name, last_name, token } = res.data;
-        // storing the token in Secure Storage
-        saveInSecureStorage("token", token);
-        // saving the user details in the global zustand state
-        logIn(email, first_name, last_name);
-      })
-      .catch((err) => {
-        setShowLoadingSpinner(false);
-        toast.show({
-          description:
-            "Email or Password you entered don't match, please try again.",
-        });
-        console.log(err);
-      });
+    // axiosInstance
+    //   .post(
+    //     "/login",
+    //     JSON.stringify({
+    //       email,
+    //       password,
+    //     }),
+    //     {
+    //       headers: {
+    //         "Content-Type": `application/json`,
+    //       },
+    //     }
+    //   )
+    //   .then((res) => {
+    //     setShowLoadingSpinner(false);
+    //     console.log(res.data);
+    //     const { email, first_name, last_name, token } = res.data;
+    //     // storing the token in Secure Storage
+    //     saveInSecureStorage("token", token);
+    //     // saving the user details in the global zustand state
+    //     logIn(email, first_name, last_name);
+    //   })
+    //   .catch((err) => {
+    //     setShowLoadingSpinner(false);
+    //     toast.show({
+    //       description:
+    //         "Email or Password you entered don't match, please try again.",
+    //     });
+    //     console.log(err);
+    //   });
   };
   return (
     <Center w="100%">
