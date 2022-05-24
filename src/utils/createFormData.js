@@ -3,7 +3,7 @@ const createFormData = (photo, body = {}) => {
 
   data.append("image", {
     name: photo.filename,
-    type: photo.type,
+    type: "image/jpeg",
     uri: Platform.OS === "ios" ? photo.uri.replace("file://", "") : photo.uri,
   });
 

@@ -7,61 +7,64 @@ import openCameraImagePicker from "../../utils/openCameraImagePicker";
 import useGalleryImagePicker from "../../hooks/useGalleryImagePicker";
 
 const DescribeImage = () => {
-  const [showGalleryImagePicker, setShowGalleryImagePicker, GallerImagePicker] =
-    useGalleryImagePicker(true, setSelectedImage, () => {
-      console.log("cancelled");
-    });
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageDescription, setImageDescription] = useState(null);
+
+  const [showGalleryImagePicker, setShowGalleryImagePicker, GallerImagePicker] =
+    useGalleryImagePicker(false, setSelectedImage, () => {
+      console.log("cancelled");
+    });
 
   const openCameraHandler = () => {
     openCameraImagePicker(setSelectedImage);
   };
   const openGalleryHandler = () => {
     setShowGalleryImagePicker(true);
-    openGalleryImagePicker(setSelectedImage);
   };
 
   useEffect(() => {
     if (selectedImage) {
-      console.log(selectedImage);
-      // console.log(selectedImage.uri);
-      // const data = createFormData(selectedImage);
-      // console.log("data", data);
-      // AxiosInstance
-      //   .post("/visualize-image", data, {
-      //     headers: {
-      //       "Content-Type": `multipart/form-data`,
-      //       transformRequest: (data) => {
-      //         return data;
-      //       },
-      //       responseType: "json",
-      //     },
-      //   })
-      //   .then((res) => {
-      //     console.log("DECRIPTION", res.data);
-      //     setImageDescription(res.data);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
+      console.log("SELECTEDIMAGE", selectedImage);
+      const data = createFormData(selectedImage);
+      console.log("DATA", data);
+      AxiosInstance.post("/visualize-image", data, {
+        headers: {
+          "Content-Type": `multipart/form-data`,
+          transformRequest: (data) => {
+            return data;
+          },
+          responseType: "json",
+        },
+      })
+        .then((res) => {
+          console.log("DECRIPTION", res.data);
+          setImageDescription(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   }, [selectedImage]);
   return (
     <View style={styles.container}>
       {showGalleryImagePicker ? (
-        <GallerImagePicker />
+        GallerImagePicker
       ) : (
         <>
-          {/* {selectedImage && (
-        <Image source={{ uri: selectedImage.uri }} style={styles.thumbnail} />
-        )}
-        {imageDescription && (
-        <>
-        <Text>Description of the image {imageDescription.description}</Text>
-          <Text>Confidence {imageDescription.confidence}</Text>
-        </>
-      )} */}
+          {selectedImage && (
+            <Image
+              source={{ uri: selectedImage.uri }}
+              style={styles.thumbnail}
+            />
+          )}
+          {imageDescription && (
+            <>
+              <Text>
+                Description of the image {imageDescription.description}
+              </Text>
+              <Text>Confidence {imageDescription.confidence}</Text>
+            </>
+          )}
 
           <TouchableOpacity
             onPress={openCameraHandler}
@@ -94,9 +97,8 @@ const DescribeImage = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "lightyellow",
-    borderColor: "red",
-    borderWidth: 2,
+    width: "100%",
+    height: "100%",
   },
   thumbnail: {
     borderColor: "red",
