@@ -5,12 +5,12 @@ import AxiosInstance from "../../services/AxiosInstance";
 import createFormData from "../../utils/createFormData";
 import openCameraImagePicker from "../../utils/openCameraImagePicker";
 import useGalleryImagePicker from "../../hooks/useGalleryImagePicker";
-import getCroppedImages from "./getCroppedImages";
+import getCroppedImage from "./getCroppedImage";
+import useStore from "../../store/user-store";
 
-const DetectFaces = () => {
+const DetectFaces = ({ navigation }) => {
+  const setDetectedFaces = useStore((state) => state.setDetectedFaces);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [detectedFaces, setDetectedFaces] = useState([]);
-  const [croppedImagesData, setCroppedImagesData] = useState([]);
 
   const [showGalleryImagePicker, setShowGalleryImagePicker, GallerImagePicker] =
     useGalleryImagePicker(false, setSelectedImage, () => {
@@ -29,7 +29,7 @@ const DetectFaces = () => {
       if (selectedImage) {
         console.log("SELECTEDIMAGE", selectedImage);
 
-        const data = createFormData(selectedImage);
+        const data = createFormData(selectedImage, "image");
         console.log("DATA", data);
 
         const res = await AxiosInstance.post("/detect-faces", data, {
@@ -42,23 +42,25 @@ const DetectFaces = () => {
           },
         });
 
-        setDetectedFaces(res.data);
-
-        const croppedImagesData = await getCroppedImages(
-          selectedImage.uri,
-          res.data.map(({ faceRectangle }) => {
-            const { height, width, left, top } = faceRectangle;
+        // res.data.map(async ()=>{...}) returns an array of Promise Objects
+        // So, to handle all of the promises I had to use Promise.all()
+        const detectedFaces = await Promise.all(
+          res.data.map(async (face) => {
+            const { height, width, left, top } = face.faceRectangle;
             return {
-              height,
-              width,
-              originX: left,
-              originY: top,
+              ...face,
+              cropData: await getCroppedImage(selectedImage.uri, {
+                height,
+                width,
+                originX: left,
+                originY: top,
+              }),
             };
           })
         );
 
-        console.log(croppedImagesData);
-        setCroppedImagesData(croppedImagesData);
+        setDetectedFaces(detectedFaces);
+        navigation.navigate("ViewDetectedFaces");
       }
     } catch (err) {
       console.log(err);
@@ -120,19 +122,6 @@ const DetectFaces = () => {
               </Button>
             </Flex>
             <Button onPress={detectFacesHandler}>Detect Faces</Button>
-
-            {croppedImagesData.map((croppedImage) => (
-              <Image
-                key={croppedImage.uri}
-                alt={croppedImage.uri}
-                source={{ uri: croppedImage.uri }}
-                style={{
-                  width: 200,
-                  height: 200,
-                  resizeMode: "cover",
-                }}
-              />
-            ))}
           </Flex>
         </ScrollView>
       )}
