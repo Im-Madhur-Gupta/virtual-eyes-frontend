@@ -4,13 +4,13 @@ import FindFaces from "./FindFaces";
 
 const Tab = createMaterialTopTabNavigator();
 
-const MatchFace = () => {
+const MatchFaces = () => {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="AddFace" component={AddFace} />
-      <Tab.Screen name="FindFaces" component={FindFaces} />
+      <Tab.Screen name="Add a Face" component={AddFace} />
+      <Tab.Screen name="Find Faces" component={FindFaces} />
     </Tab.Navigator>
   );
 };
 
-export default MatchFace;
+export default MatchFaces;

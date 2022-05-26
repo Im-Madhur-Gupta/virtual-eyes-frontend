@@ -67,7 +67,10 @@ const AddFace = () => {
   };
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <Flex width="100%" height="100%">
+      <Flex
+        width="100%"
+        height="100%"
+      >
         {showGalleryImagePicker ? (
           GallerImagePicker
         ) : (
