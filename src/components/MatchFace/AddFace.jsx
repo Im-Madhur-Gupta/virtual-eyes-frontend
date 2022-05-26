@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Button, Flex, Image, Text, useToast, Heading } from "native-base";
+import { Button, Flex, Text, useToast, Heading } from "native-base";
 
 import AddFaceForm from "../AddFaceForm";
 
 import openCameraImagePicker from "../../utils/openCameraImagePicker";
 import useGalleryImagePicker from "../../hooks/useGalleryImagePicker";
 import addFaceToPersonGroup from "../../utils/addFaceToPersonGroup";
+import FaceImageCarousel from "./FaceImageCarousel";
 
 const AddFace = () => {
   const toast = useToast();
@@ -42,21 +43,9 @@ const AddFace = () => {
       ) : (
         <>
           <Heading>Selected Images</Heading>
+
           {selectedImages.length > 0 ? (
-            selectedImages.map((image) => (
-              <Image
-                key={image.uri}
-                source={{ uri: image.uri }}
-                alt={image.filename}
-                style={{
-                  borderColor: "red",
-                  borderWidth: 2,
-                  width: 200,
-                  height: 200,
-                  resizeMode: "cover",
-                }}
-              />
-            ))
+            <FaceImageCarousel images={selectedImages} />
           ) : (
             <Text>You havent selected any images yet.</Text>
           )}

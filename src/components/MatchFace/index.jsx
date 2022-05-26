@@ -6,7 +6,11 @@ const Tab = createMaterialTopTabNavigator();
 
 const MatchFaces = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={{
+        swipeEnabled: false,
+      }}
+    >
       <Tab.Screen name="Add a Face" component={AddFace} />
       <Tab.Screen name="Find Faces" component={FindFaces} />
     </Tab.Navigator>
