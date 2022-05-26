@@ -25,7 +25,7 @@ const FindFaces = () => {
   const findFacesHandler = () => {
     if (selectedImage) {
       console.log("SELECTEDIMAGE", selectedImage);
-      const data = createFormData(selectedImage);
+      const data = createFormData(selectedImage, "image");
       console.log("DATA", data);
       AxiosInstance.post("/match-face/find-faces", data, {
         headers: {

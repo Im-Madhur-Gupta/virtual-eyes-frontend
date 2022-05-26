@@ -11,7 +11,7 @@ import Register from "./src/components/Register";
 import useStore from "./src/store/user-store";
 import MatchFaces from "./src/components/MatchFace";
 import DescribeImage from "./src/components/DescribeImage";
-import DetectFaces from "./src/components/DetectFaces";
+import DetectFacesNavigator from "./src/components/DetectFaces/DetectFacesNavigator";
 
 const Drawer = createDrawerNavigator();
 
@@ -27,7 +27,10 @@ export default function App() {
           {isLoggedIn ? (
             <>
               <Drawer.Screen name="Home" component={Home} />
-              <Drawer.Screen name="DetectFaces" component={DetectFaces} />
+              <Drawer.Screen
+                name="DetectFacesNavigator"
+                component={DetectFacesNavigator}
+              />
               <Drawer.Screen name="MatchFaces" component={MatchFaces} />
               <Drawer.Screen name="DescribeImage" component={DescribeImage} />
             </>
