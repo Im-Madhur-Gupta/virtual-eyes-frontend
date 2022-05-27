@@ -1,17 +1,17 @@
 import create from "zustand";
 
+// using immer to make sure I am not mutating the state while I am assigning it some value.
+import produce from "immer";
+
 const initialState = {
   isLoggedIn: false,
   email: null,
   first_name: null,
   last_name: null,
-  // Using normailized representation of detectedFacesData instead of a simple array
-  // to improve performance while adding facename attribute to a particular face
-  detectedFaces: {
-    allIds: [],
-    byId: {},
-  },
+  detectedFaces: [],
 };
+
+// Note - Here, immer is only needed for the setDetectedFaces action.
 
 const useStore = create((set) => ({
   ...initialState,
@@ -19,25 +19,12 @@ const useStore = create((set) => ({
     set({ isLoggedIn: true, email, first_name, last_name }),
   logOut: () => set({ ...initialState }),
   setDetectedFaces: (faces) => {
-    const parsedDetectedFaces = {
-      allIds: [],
-      byId: {},
-    };
-
-    faces.forEach((face) => {
-      parsedDetectedFaces.allIds.push(face.faceId);
-      parsedDetectedFaces.byId[face.faceId] = { ...face };
-    });
-
-    set({ detectedFaces: parsedDetectedFaces });
+    set(
+      produce((state) => {
+        state.detectedFaces = faces;
+      })
+    );
   },
-  clearDetectedFaces: () =>
-    set({
-      detectedFaces: {
-        allIds: [],
-        byId: {},
-      },
-    }),
 }));
 
 export default useStore;

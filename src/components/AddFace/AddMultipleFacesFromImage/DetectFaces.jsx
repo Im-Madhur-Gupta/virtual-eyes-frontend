@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { Button, Flex, Image, Text, Heading, ScrollView } from "native-base";
 
-import AxiosInstance from "../../services/AxiosInstance";
-import createFormData from "../../utils/createFormData";
-import openCameraImagePicker from "../../utils/openCameraImagePicker";
-import useGalleryImagePicker from "../../hooks/useGalleryImagePicker";
-import getCroppedImage from "./getCroppedImage";
-import useStore from "../../store/user-store";
+import MediaAccessibiltyBtns from "../../../layouts/MediaAccessiblityBtns";
+
+import AxiosInstance from "../../../services/AxiosInstance";
+import createFormData from "../../../utils/createFormData";
+import openCameraImagePicker from "../../../utils/openCameraImagePicker";
+import useGalleryImagePicker from "../../../hooks/useGalleryImagePicker";
+import getCroppedImage from "../../../utils/getCroppedImage";
+import useStore from "../../../store/user-store";
 
 const DetectFaces = ({ navigation }) => {
   const setDetectedFaces = useStore((state) => state.setDetectedFaces);
@@ -60,7 +62,7 @@ const DetectFaces = ({ navigation }) => {
         );
 
         setDetectedFaces(detectedFaces);
-        navigation.navigate("ViewDetectedFaces");
+        navigation.navigate("AddFacesToGroup");
       }
     } catch (err) {
       console.log(err);
@@ -82,6 +84,7 @@ const DetectFaces = ({ navigation }) => {
         >
           <Flex width="100%" height="100%" align="center">
             <Heading>Selected Image</Heading>
+
             {selectedImage ? (
               <Image
                 alt={selectedImage.filename}
@@ -96,31 +99,11 @@ const DetectFaces = ({ navigation }) => {
               <Text>You havent selected any image yet.</Text>
             )}
 
-            <Flex direction="row">
-              <Button
-                onPress={openCameraHandler}
-                style={{
-                  margin: 10,
-                  paddingHorizontal: 10,
-                  paddingVertical: 5,
-                  backgroundColor: "maroon",
-                }}
-              >
-                <Text>Open Camera</Text>
-              </Button>
+            <MediaAccessibiltyBtns
+              onOpenCamera={openCameraHandler}
+              onOpenGallery={openGalleryHandler}
+            />
 
-              <Button
-                onPress={openGalleryHandler}
-                style={{
-                  margin: 10,
-                  paddingHorizontal: 10,
-                  paddingVertical: 5,
-                  backgroundColor: "maroon",
-                }}
-              >
-                <Text>Open Gallery</Text>
-              </Button>
-            </Flex>
             <Button onPress={detectFacesHandler}>Detect Faces</Button>
           </Flex>
         </ScrollView>

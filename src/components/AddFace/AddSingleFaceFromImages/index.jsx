@@ -1,14 +1,26 @@
 import { useState } from "react";
 import { Button, Flex, Text, useToast, Heading } from "native-base";
 
-import AddFaceForm from "../AddFaceForm";
+import AddFaceForm from "../../AddFaceForm";
 
-import openCameraImagePicker from "../../utils/openCameraImagePicker";
-import useGalleryImagePicker from "../../hooks/useGalleryImagePicker";
-import addFaceToPersonGroup from "../../utils/addFaceToPersonGroup";
+import MediaAccessibiltyBtns from "../../../layouts/MediaAccessiblityBtns";
+import styles from "../../../layouts/globalStyleSheet";
+
+import openCameraImagePicker from "../../../utils/openCameraImagePicker";
+import useGalleryImagePicker from "../../../hooks/useGalleryImagePicker";
+import addFaceToPersonGroup from "../../../utils/addFaceToPersonGroup";
 import FaceImageCarousel from "./FaceImageCarousel";
 
-const AddFace = () => {
+/**
+ * This component will be used to add a single face present in multiple images to a person group.
+ *
+ * Typically, this will be used to improve the accuracy of the face detection model for the supplied face.
+ *
+ * Know more about Azure Face API's Person Group {@link https://docs.microsoft.com/en-in/azure/cognitive-services/face/concepts/face-recognition here}.
+ *
+ * @returns JSX.Element
+ */
+const AddSingleFaceFromImages = () => {
   const toast = useToast();
 
   const [selectedImages, setSelectedImages] = useState([]);
@@ -50,31 +62,10 @@ const AddFace = () => {
             <Text>You havent selected any images yet.</Text>
           )}
 
-          <Flex direction="row">
-            <Button
-              onPress={openCameraHandler}
-              style={{
-                margin: 10,
-                paddingHorizontal: 10,
-                paddingVertical: 5,
-                backgroundColor: "maroon",
-              }}
-            >
-              <Text>Open Camera</Text>
-            </Button>
-
-            <Button
-              onPress={openGalleryHandler}
-              style={{
-                margin: 10,
-                paddingHorizontal: 10,
-                paddingVertical: 5,
-                backgroundColor: "maroon",
-              }}
-            >
-              <Text>Open Gallery</Text>
-            </Button>
-          </Flex>
+          <MediaAccessibiltyBtns
+            onOpenCamera={openCameraHandler}
+            onOpenGallery={openGalleryHandler}
+          />
 
           <AddFaceForm onAddFace={addFaceHandler} />
         </>
@@ -83,4 +74,4 @@ const AddFace = () => {
   );
 };
 
-export default AddFace;
+export default AddSingleFaceFromImages;

@@ -2,13 +2,13 @@ import React from "react";
 import { View, StyleSheet, Dimensions } from "react-native";
 import { Image, Text, useToast } from "native-base";
 
-import AddFaceForm from "../../AddFaceForm";
-import addFaceToPersonGroup from "../../../utils/addFaceToPersonGroup";
+import AddFaceForm from "../../../AddFaceForm";
+import addFaceToPersonGroup from "../../../../utils/addFaceToPersonGroup";
 
 export const SLIDER_WIDTH = Dimensions.get("window").width + 80;
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 
-const CaraouselFaceCard = ({ item: face, index }) => {
+const FaceDetailsCard = ({ item: face, index }) => {
   // const toast = useToast();
 
   // Parsing the face attributes so that it can be displayed to the user
@@ -169,4 +169,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CaraouselFaceCard;
+export default FaceDetailsCard;

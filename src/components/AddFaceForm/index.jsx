@@ -7,14 +7,18 @@ const AddFaceForm = ({ onAddFace }) => {
   const facenameChangeHandler = (facename) => {
     setFacename(facename);
   };
-  
+
   return (
     <Flex>
       <FormControl>
         <FormControl.Label>Enter Name</FormControl.Label>
         <Input onChangeText={facenameChangeHandler} value={facename} />
       </FormControl>
-      <Button onPress={() => onAddFace(facename)}>Add Face</Button>
+      <Button
+        onPress={() => onAddFace(facename)}
+      >
+        Add Face
+      </Button>
     </Flex>
   );
 };

@@ -1,19 +1,13 @@
 import { useState, useRef } from "react";
-import useStore from "../../../store/user-store";
+import useStore from "../../../../store/user-store";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 
-import CaraouselFaceCard, {
-  SLIDER_WIDTH,
-  ITEM_WIDTH,
-} from "./CaraouselFaceCard";
-import getArrayRepOfFaces from "../../../utils/getArrayRepOfFaces";
+import FaceDetailsCard, { SLIDER_WIDTH, ITEM_WIDTH } from "./FaceDetailsCard";
 
 import { Flex } from "native-base";
 
-const ViewDetectedFaces = () => {
-  const arrayRepOfFaces = getArrayRepOfFaces(
-    useStore((state) => state.detectedFaces)
-  );
+const AddFacesToGroup = () => {
+  const detectedFaces = useStore((state) => state.detectedFaces);
   const [index, setIndex] = useState(0);
 
   const isCarousel = useRef(null);
@@ -24,8 +18,8 @@ const ViewDetectedFaces = () => {
         layout="stack"
         layoutCardOffset={18}
         ref={isCarousel}
-        data={arrayRepOfFaces}
-        renderItem={CaraouselFaceCard}
+        data={detectedFaces}
+        renderItem={FaceDetailsCard}
         sliderWidth={SLIDER_WIDTH}
         itemWidth={ITEM_WIDTH}
         inactiveSlideShift={0}
@@ -33,7 +27,7 @@ const ViewDetectedFaces = () => {
         useScrollView={true}
       />
       <Pagination
-        dotsLength={arrayRepOfFaces.length}
+        dotsLength={detectedFaces.length}
         activeDotIndex={index}
         carouselRef={isCarousel}
         dotStyle={{
@@ -50,4 +44,4 @@ const ViewDetectedFaces = () => {
     </Flex>
   );
 };
-export default ViewDetectedFaces;
+export default AddFacesToGroup;
