@@ -8,8 +8,10 @@ import AxiosInstance from "../../services/AxiosInstance";
 import createFormData from "../../utils/createFormData";
 import openCameraImagePicker from "../../utils/openCameraImagePicker";
 import useGalleryImagePicker from "../../hooks/useGalleryImagePicker";
+import useStore from "../../store/user-store";
 
 const VisualizeImage = () => {
+  const setIsLoading = useStore((state) => state.setIsLoading);
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageDescription, setImageDescription] = useState(null);
 
@@ -28,9 +30,13 @@ const VisualizeImage = () => {
   const describeImageHandler = async () => {
     try {
       if (selectedImage) {
+        setIsLoading(true);
+
         console.log("DescribeImage - SELECTED IMAGE - ", selectedImage);
+
         const formData = createFormData(selectedImage, "image");
         console.log("DescribeImage - FORM DATA - ", formData);
+
         const response = await AxiosInstance.post(
           "/visualize-image",
           formData,
@@ -45,10 +51,13 @@ const VisualizeImage = () => {
           }
         );
 
+        setIsLoading(false);
+
         console.log("DescribeImage - IMAGE DESCRIPTION - ", response.data);
         setImageDescription(response.data);
       }
     } catch (err) {
+      setIsLoading(false);
       console.log(err);
     }
   };

@@ -8,12 +8,13 @@ const checkForLogIn = async () => {
   const token = await getFromSecureStore("token");
   const userDetails = await getFromSecureStore("user-details");
 
-  console.log("checkforlogin");
+  console.log("checkForLogIn func");
 
   if (token && userDetails) {
-    console.log("checkforlogin inside");
+    console.log("checkForLogIn func - check passed");
     await logIn(token, JSON.parse(userDetails));
   } else {
+    console.log("checkForLogIn func - check failed");
     await logOut();
   }
 };

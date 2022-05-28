@@ -25,7 +25,7 @@ export default function App() {
 
   const isLoggedIn = useStore((state) => state.isLoggedIn);
 
-  console.log("isLoggedIn", isLoggedIn);
+  console.log("App - isLoggedIn - ", isLoggedIn);
 
   // check for previous login after the app starts for the first time
   useEffect(() => {
@@ -39,6 +39,7 @@ export default function App() {
     <NativeBaseProvider>
       <NavigationContainer>
         <SafeAreaProvider>
+          <LoadingSpinner />
           {isLoggedIn ? <AppNavigator /> : <AuthNavigator />}
         </SafeAreaProvider>
       </NavigationContainer>

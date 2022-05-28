@@ -3,6 +3,8 @@ import { Button, Flex, Image, Text, Heading, ScrollView } from "native-base";
 
 import MediaAccessibiltyBtns from "../../../layouts/MediaAccessiblityBtns";
 
+import LoadingSpinner from "../../LoadingSpinner";
+
 import AxiosInstance from "../../../services/AxiosInstance";
 import createFormData from "../../../utils/createFormData";
 import openCameraImagePicker from "../../../utils/openCameraImagePicker";
@@ -11,6 +13,7 @@ import getCroppedImage from "../../../utils/getCroppedImage";
 import useStore from "../../../store/user-store";
 
 const DetectFaces = ({ navigation }) => {
+  const setIsLoading = useStore((state) => state.setIsLoading);
   const setDetectedFaces = useStore((state) => state.setDetectedFaces);
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -29,12 +32,14 @@ const DetectFaces = ({ navigation }) => {
   const detectFacesHandler = async () => {
     try {
       if (selectedImage) {
-        console.log("SELECTEDIMAGE", selectedImage);
+        setIsLoading(true);
 
-        const data = createFormData(selectedImage, "image");
-        console.log("DATA", data);
+        console.log("DetectFaces - SELECTED IMAGE - ", selectedImage);
 
-        const res = await AxiosInstance.post("/detect-faces", data, {
+        const formData = createFormData(selectedImage, "image");
+        console.log("DetectFaces - FORM DATA - ", formData);
+
+        const res = await AxiosInstance.post("/detect-faces", formData, {
           headers: {
             "Content-Type": `multipart/form-data`,
             transformRequest: (data) => {
@@ -61,10 +66,12 @@ const DetectFaces = ({ navigation }) => {
           })
         );
 
+        setIsLoading(false);
         setDetectedFaces(detectedFaces);
         navigation.navigate("AddFacesToGroup");
       }
     } catch (err) {
+      setIsLoading(false);
       console.log(err);
     }
   };

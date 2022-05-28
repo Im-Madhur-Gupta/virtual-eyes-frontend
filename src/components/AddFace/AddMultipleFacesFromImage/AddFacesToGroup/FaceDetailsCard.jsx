@@ -2,6 +2,8 @@ import React from "react";
 import { View, StyleSheet, Dimensions } from "react-native";
 import { Image, Text, useToast } from "native-base";
 
+import useStore from "../../../../store/user-store";
+
 import AddFaceForm from "../../../AddFaceForm";
 import addFaceToPersonGroup from "../../../../utils/addFaceToPersonGroup";
 
@@ -9,6 +11,7 @@ export const SLIDER_WIDTH = Dimensions.get("window").width + 80;
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 
 const FaceDetailsCard = ({ item: face, index }) => {
+  const setIsLoading = useStore.getState().setIsLoading;
   // const toast = useToast();
 
   // Parsing the face attributes so that it can be displayed to the user
@@ -109,9 +112,12 @@ const FaceDetailsCard = ({ item: face, index }) => {
 
     if (uri && facename) {
       try {
+        setIsLoading(true);
         await addFaceToPersonGroup({ filename, uri }, facename, false);
         // toast.show({ description: "Face will be added shortly." });
+        setIsLoading(false);
       } catch (err) {
+        setIsLoading(false);
         console.log(err);
       }
     }

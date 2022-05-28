@@ -10,6 +10,8 @@ import openCameraImagePicker from "../../../utils/openCameraImagePicker";
 import useGalleryImagePicker from "../../../hooks/useGalleryImagePicker";
 import addFaceToPersonGroup from "../../../utils/addFaceToPersonGroup";
 import FaceImageCarousel from "./FaceImageCarousel";
+import LoadingSpinner from "../../LoadingSpinner";
+import useStore from "../../../store/user-store";
 
 /**
  * This component will be used to add a single face present in multiple images to a person group.
@@ -21,6 +23,7 @@ import FaceImageCarousel from "./FaceImageCarousel";
  * @returns JSX.Element
  */
 const AddSingleFaceFromImages = () => {
+  const setIsLoading = useStore((state) => state.setIsLoading);
   const toast = useToast();
 
   const [selectedImages, setSelectedImages] = useState([]);
@@ -41,9 +44,12 @@ const AddSingleFaceFromImages = () => {
   const addFaceHandler = async (facename) => {
     if (selectedImages.length > 0 && facename) {
       try {
+        setIsLoading(true);
         await addFaceToPersonGroup(selectedImages, facename);
+        setIsLoading(false);
         toast.show({ description: "Face will be added shortly." });
       } catch (err) {
+        setIsLoading(false);
         console.log(err);
       }
     }

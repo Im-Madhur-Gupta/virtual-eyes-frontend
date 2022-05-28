@@ -13,18 +13,15 @@ import {
 } from "native-base";
 import { Link } from "@react-navigation/native";
 
-import authAnimation from "../../assets/animations/auth.json";
-
 import AxiosInstance from "../../services/AxiosInstance";
 import useStore from "../../store/user-store";
-import LoadingSpinner from "../LoadingSpinner";
 import Animation from "../Animation";
 import styles from "../../layouts/globalStyleSheet";
+import authAnimation from "../../assets/animations/auth.json";
 
 const Login = () => {
+  const setIsLoading = useStore((state) => state.setIsLoading);
   const toast = useToast();
-
-  const [showLoadingSpinner, setShowLoadingSpinner] = useState(false);
 
   const logIn = useStore((state) => state.logIn);
 
@@ -40,7 +37,7 @@ const Login = () => {
   };
 
   const loginHandler = async () => {
-    setShowLoadingSpinner(true);
+    setIsLoading(true);
     try {
       const response = await AxiosInstance.post(
         "/login",
@@ -55,8 +52,6 @@ const Login = () => {
         }
       );
 
-      setShowLoadingSpinner(false);
-
       console.log(response.data);
 
       // saving the user details in secure store as well as global zustand state
@@ -64,8 +59,10 @@ const Login = () => {
         email: response.data.email,
         name: response.data.name,
       });
+
+      setIsLoading(false);
     } catch (err) {
-      setShowLoadingSpinner(false);
+      setIsLoading(false);
       toast.show({
         description: "Entered Email or Password don't match, please try again.",
       });
@@ -98,65 +95,59 @@ const Login = () => {
         py="8"
         w="100%"
       >
-        {showLoadingSpinner ? (
-          <LoadingSpinner accessibilityLabel="Signing you in" />
-        ) : (
-          <>
-            <Heading
-              size="lg"
-              textAlign="center"
-              fontWeight="600"
-              color="coolGray.800"
-              _dark={{
-                color: "warmGray.50",
-              }}
-            >
-              Login
-            </Heading>
+        <Heading
+          size="lg"
+          textAlign="center"
+          fontWeight="600"
+          color="coolGray.800"
+          _dark={{
+            color: "warmGray.50",
+          }}
+        >
+          Login
+        </Heading>
 
-            <VStack space={3} mt="5">
-              <FormControl>
-                <FormControl.Label>Email ID</FormControl.Label>
-                <Input onChangeText={emailChangeHandler} value={email} />
-              </FormControl>
-              <FormControl>
-                <FormControl.Label>Password</FormControl.Label>
-                <Input
-                  onChangeText={passwordChangeHandler}
-                  value={password}
-                  type="password"
-                />
-              </FormControl>
-              <Button mt="2" colorScheme="indigo" onPress={loginHandler}>
-                Sign in
-              </Button>
-              <HStack mt="6" justifyContent="center">
-                <Text
-                  fontSize="md"
-                  color="coolGray.600"
-                  _dark={{
-                    color: "warmGray.200",
-                  }}
-                  paddingRight="2"
-                >
-                  I'm a new user.
-                </Text>
-                <Link
-                  to={{ screen: "Signup" }}
-                  style={{
-                    color: styles.colors.purple,
-                    fontWeight: "500",
-                    fontSize: 16,
-                    textDecorationLine: "underline",
-                  }}
-                  href="#"
-                >
-                  Sign Up
-                </Link>
-              </HStack>
-            </VStack>
-          </>
-        )}
+        <VStack space={3} mt="5">
+          <FormControl>
+            <FormControl.Label>Email ID</FormControl.Label>
+            <Input onChangeText={emailChangeHandler} value={email} />
+          </FormControl>
+          <FormControl>
+            <FormControl.Label>Password</FormControl.Label>
+            <Input
+              onChangeText={passwordChangeHandler}
+              value={password}
+              type="password"
+            />
+          </FormControl>
+          <Button mt="2" colorScheme="indigo" onPress={loginHandler}>
+            Sign in
+          </Button>
+          <HStack mt="6" justifyContent="center">
+            <Text
+              fontSize="md"
+              color="coolGray.600"
+              _dark={{
+                color: "warmGray.200",
+              }}
+              paddingRight="2"
+            >
+              I'm a new user.
+            </Text>
+            <Link
+              to={{ screen: "Signup" }}
+              style={{
+                color: styles.colors.purple,
+                fontWeight: "500",
+                fontSize: 16,
+                textDecorationLine: "underline",
+              }}
+              href="#"
+            >
+              Sign Up
+            </Link>
+          </HStack>
+        </VStack>
       </Flex>
     </Flex>
   );

@@ -10,6 +10,7 @@ const initialState = {
   email: null,
   name: null,
   detectedFaces: [],
+  isLoading: false,
 };
 
 // Note - Here, immer is only needed for the setDetectedFaces action as its an array of nested objects.
@@ -34,6 +35,7 @@ const useStore = create((set) => ({
       })
     );
   },
+  setIsLoading: (value) => set({ isLoading: value }),
 }));
 
 export default useStore;

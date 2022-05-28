@@ -8,8 +8,11 @@ import AxiosInstance from "../../services/AxiosInstance";
 import createFormData from "../../utils/createFormData";
 import openCameraImagePicker from "../../utils/openCameraImagePicker";
 import useGalleryImagePicker from "../../hooks/useGalleryImagePicker";
+import useStore from "../../store/user-store";
 
 const FindFaces = () => {
+  const setIsLoading = useStore((state) => state.setIsLoading);
+
   const [selectedImage, setSelectedImage] = useState(null);
   const [foundFacesData, setFoundFacesData] = useState({
     detectedPersons: [],
@@ -31,6 +34,7 @@ const FindFaces = () => {
   const findFacesHandler = async () => {
     try {
       if (selectedImage) {
+        setIsLoading(true);
         console.log("FindFaces - SELECTEDIMAGE - ", selectedImage);
 
         const formData = createFormData(selectedImage, "image");
@@ -51,9 +55,11 @@ const FindFaces = () => {
         );
 
         console.log("FindFaces - RESPONSE.DATA - ", response.data);
+        setIsLoading(false);
         setFoundFacesData(response.data);
       }
     } catch (err) {
+      setIsLoading(false);
       console.log(err);
     }
   };
