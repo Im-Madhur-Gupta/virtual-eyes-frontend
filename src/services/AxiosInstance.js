@@ -1,5 +1,5 @@
-import * as SecureStore from "expo-secure-store";
 import axios from "axios";
+import getFromSecureStore from "../utils/getFromSecureStore";
 
 const AxiosInstance = axios.create({
   //   baseURL: "https://virtual-eyes-backend.azurewebsites.net",
@@ -7,7 +7,7 @@ const AxiosInstance = axios.create({
 });
 
 AxiosInstance.interceptors.request.use(async (req) => {
-  const token = await SecureStore.getItemAsync("token");
+  const token = await getFromSecureStore("token");
   req.headers["x-access-token"] = token;
   return req;
 });

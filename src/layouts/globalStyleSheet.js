@@ -1,6 +1,10 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
+  colors: {
+    purple: "#4a304b",
+    grey: "#6a6a6a",
+  },
   flexContainerColumn: {
     flexDirection: "column",
     alignItems: "center",

@@ -2,7 +2,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { Flex, Button, Text } from "native-base";
 import useStore from "../../store/user-store";
 
-const Logout = ({ closeDrawer }) => {
+const LogoutButton = ({ closeDrawer }) => {
   const logOut = useStore((state) => state.logOut);
   return (
     <Button
@@ -13,9 +13,9 @@ const Logout = ({ closeDrawer }) => {
         borderRadius: 30,
         backgroundColor: "#58c8df",
       }}
-      onPress={() => {
-        logOut();
-        closeDrawer();
+      onPress={async () => {
+        await logOut();
+        // closeDrawer();
       }}
     >
       <Flex direction="row" align="center" justify="center">
@@ -28,4 +28,4 @@ const Logout = ({ closeDrawer }) => {
   );
 };
 
-export default Logout;
+export default LogoutButton;

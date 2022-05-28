@@ -8,30 +8,33 @@ import {
   Button,
   HStack,
   Text,
-  useToast,
   Flex,
+  useToast,
 } from "native-base";
 import { Link } from "@react-navigation/native";
 
 import authAnimation from "../../assets/animations/auth.json";
 
+import Animation from "../Animation";
 import AxiosInstance from "../../services/AxiosInstance";
 import useStore from "../../store/user-store";
 import LoadingSpinner from "../LoadingSpinner";
-import Animation from "../Animation";
 import styles from "../../layouts/globalStyleSheet";
 
-const Login = () => {
+const Register = () => {
   const toast = useToast();
-
   const [showLoadingSpinner, setShowLoadingSpinner] = useState(false);
 
   const logIn = useStore((state) => state.logIn);
 
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   // change handler functions
+  const nameChangeHandler = (enteredName) => {
+    setName(enteredName);
+  };
   const emailChangeHandler = (email) => {
     setEmail(email);
   };
@@ -39,14 +42,15 @@ const Login = () => {
     setPassword(password);
   };
 
-  const loginHandler = async () => {
+  const registerHandler = async () => {
     setShowLoadingSpinner(true);
     try {
       const response = await AxiosInstance.post(
-        "/login",
+        "/register",
         JSON.stringify({
           email,
           password,
+          name,
         }),
         {
           headers: {
@@ -67,7 +71,7 @@ const Login = () => {
     } catch (err) {
       setShowLoadingSpinner(false);
       toast.show({
-        description: "Entered Email or Password don't match, please try again.",
+        description: "Something went wrong, please try again.",
       });
       console.log(err);
     }
@@ -99,27 +103,32 @@ const Login = () => {
         w="100%"
       >
         {showLoadingSpinner ? (
-          <LoadingSpinner accessibilityLabel="Signing you in" />
+          <LoadingSpinner accessibilityLabel="Signing up" />
         ) : (
           <>
             <Heading
               size="lg"
               textAlign="center"
-              fontWeight="600"
               color="coolGray.800"
               _dark={{
                 color: "warmGray.50",
               }}
+              fontWeight="semibold"
             >
-              Login
+              Sign Up
             </Heading>
-
             <VStack space={3} mt="5">
-              <FormControl>
-                <FormControl.Label>Email ID</FormControl.Label>
+              <FormControl isRequired>
+                <FormControl.Label>Name</FormControl.Label>
+                <Input onChangeText={nameChangeHandler} value={name} />
+              </FormControl>
+
+              <FormControl isRequired>
+                <FormControl.Label>Email</FormControl.Label>
                 <Input onChangeText={emailChangeHandler} value={email} />
               </FormControl>
-              <FormControl>
+
+              <FormControl isRequired>
                 <FormControl.Label>Password</FormControl.Label>
                 <Input
                   onChangeText={passwordChangeHandler}
@@ -127,8 +136,9 @@ const Login = () => {
                   type="password"
                 />
               </FormControl>
-              <Button mt="2" colorScheme="indigo" onPress={loginHandler}>
-                Sign in
+
+              <Button mt="2" colorScheme="indigo" onPress={registerHandler}>
+                Sign up
               </Button>
               <HStack mt="6" justifyContent="center">
                 <Text
@@ -139,10 +149,10 @@ const Login = () => {
                   }}
                   paddingRight="2"
                 >
-                  I'm a new user.
+                  Already a user?
                 </Text>
                 <Link
-                  to={{ screen: "Signup" }}
+                  to={{ screen: "Login" }}
                   style={{
                     color: styles.colors.purple,
                     fontWeight: "500",
@@ -151,7 +161,7 @@ const Login = () => {
                   }}
                   href="#"
                 >
-                  Sign Up
+                  Login
                 </Link>
               </HStack>
             </VStack>
@@ -162,4 +172,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
