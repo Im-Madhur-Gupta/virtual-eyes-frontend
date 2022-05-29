@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Button, Flex, FormControl, Input } from "native-base";
+import { Button, Flex, FormControl, Input, Text } from "native-base";
+import globalStyles from "../../layouts/globalStyleSheet";
 
-const AddFaceForm = ({ onAddFace }) => {
+const AddFaceForm = ({ onAddFace, containerPaddingY = 5 }) => {
   const [facename, setFacename] = useState("");
 
   const facenameChangeHandler = (facename) => {
@@ -9,13 +10,23 @@ const AddFaceForm = ({ onAddFace }) => {
   };
 
   return (
-    <Flex>
-      <FormControl>
-        <FormControl.Label>Enter Name</FormControl.Label>
-        <Input onChangeText={facenameChangeHandler} value={facename} />
+    <Flex align="center" justify="center" paddingY={containerPaddingY}>
+      <FormControl isRequired>
+        <FormControl.Label>
+          <Text style={globalStyles.infoText}>Enter Name</Text>
+        </FormControl.Label>
+        <Input
+          onChangeText={facenameChangeHandler}
+          value={facename}
+          width="80%"
+          marginBottom={5}
+        />
       </FormControl>
-      <Button onPress={() => onAddFace(facename)}>
-        Add Face
+      <Button
+        onPress={() => onAddFace(facename)}
+        style={globalStyles.primaryBtn}
+      >
+        <Text style={globalStyles.primaryBtnTxt}>Add Person</Text>
       </Button>
     </Flex>
   );

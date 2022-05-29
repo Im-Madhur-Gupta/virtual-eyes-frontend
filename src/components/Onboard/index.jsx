@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 0,
     marginVertical: 0,
-    color: globalStyles.colors.purple,
+    color: globalStyles.colors.primary,
     fontFamily: "Poppins_700Bold",
   },
   subtitleText: { fontSize: 18, paddingHorizontal: 15 },
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   subtitleStepHead: {
     fontSize: 18,
     fontWeight: "500",
-    color: globalStyles.colors.purple,
+    color: globalStyles.colors.primary,
     marginRight: 5,
   },
   subtitleStepText: {
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
 
 const pages = [
   {
-    backgroundColor: globalStyles.colors.purple,
+    backgroundColor: globalStyles.colors.primary,
     title: "Welcome to Virtual Eyes",
     subtitle: "A pair of eyes for those who can't see.",
     titleStyles: { color: "#ffffff" },
@@ -85,7 +85,7 @@ const pages = [
   },
 ];
 
-const Onboard = ({navigation}) => {
+const Onboard = ({ navigation }) => {
   const onDone = () => navigation.navigate("Login");
   const onSkip = () => navigation.replace("Login");
 

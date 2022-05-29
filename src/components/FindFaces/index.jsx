@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Button, Flex, Image, Text, Heading, Center } from "native-base";
+import { Button, Flex, Image, Text, Center, ScrollView } from "native-base";
 
-import styles from "../../layouts/globalStyleSheet";
+import globalStyles from "../../layouts/globalStyleSheet";
 import MediaAccessibiltyBtns from "../../layouts/MediaAccessiblityBtns";
 
 import AxiosInstance from "../../services/AxiosInstance";
@@ -24,8 +24,9 @@ const FindFaces = () => {
       console.log("cancelled");
     });
 
-  const openCameraHandler = () => {
-    openCameraImagePicker(setSelectedImage);
+  const openCameraHandler = async () => {
+    const capturedImage = openCameraImagePicker();
+    setSelectedImage(capturedImage);
   };
   const openGalleryHandler = () => {
     setShowGalleryImagePicker(true);
@@ -64,45 +65,67 @@ const FindFaces = () => {
     }
   };
   return (
-    <Flex style={styles.flexContainerColumn}>
+    <Flex style={globalStyles.flexContainerColumn}>
       {showGalleryImagePicker ? (
         GallerImagePicker
       ) : (
         <>
-          <Heading paddingTop={5}>Selected Image</Heading>
+          <ScrollView
+            contentContainerStyle={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Center style={globalStyles.selectedImageContainer}>
+              {selectedImage ? (
+                <Image
+                  source={{ uri: selectedImage.uri }}
+                  style={globalStyles.selectedImage}
+                />
+              ) : (
+                <Text style={globalStyles.infoText}>
+                  Please select an image.
+                </Text>
+              )}
+            </Center>
 
-          <Center style={styles.selectedImageContainer}>
-            {selectedImage ? (
-              <Image
-                source={{ uri: selectedImage.uri }}
-                style={styles.selectedImage}
-              />
-            ) : (
-              <Text>Please select an image.</Text>
-            )}
-          </Center>
-
-          <Center>
             <MediaAccessibiltyBtns
               onOpenCamera={openCameraHandler}
               onOpenGallery={openGalleryHandler}
             />
-            <Button onPress={findFacesHandler}>Find Faces</Button>
-          </Center>
 
-          <Center style={styles.resultContainer}>
-            <Text>Faces present in the Image</Text>
-            {/* Conditional rendering of output content */}
-            {foundFacesData.detectedPersons.length > 0 ? (
-              <>
-                {foundFacesData.detectedPersons.map((face) => (
-                  <Text key={face.id}>{face.name}</Text>
-                ))}
-              </>
-            ) : (
-              <Text>{foundFacesData.message}</Text>
-            )}
-          </Center>
+            <Center style={globalStyles.resultContainer}>
+              <Text style={globalStyles.infoText}>
+                People present in the Image
+              </Text>
+              {/* Conditional rendering of output content */}
+              {foundFacesData.detectedPersons.length > 0 ? (
+                <>
+                  {foundFacesData.detectedPersons.map((face) => (
+                    <Text
+                      key={face.id}
+                      style={globalStyles.resultText}
+                      paddingY={0}
+                    >
+                      {face.name}
+                    </Text>
+                  ))}
+                </>
+              ) : foundFacesData.message !== "" ? (
+                <Text style={globalStyles.infoText}>
+                  {foundFacesData.message}
+                </Text>
+              ) : (
+                ""
+              )}
+            </Center>
+
+            <Button onPress={findFacesHandler} style={globalStyles.primaryBtn}>
+              <Text style={globalStyles.primaryBtnTxt}>Find People</Text>
+            </Button>
+          </ScrollView>
         </>
       )}
     </Flex>

@@ -15,13 +15,13 @@ const AddFace = () => {
       <Tab.Screen
         name="AddSingleFaceFromImages"
         options={{
-          title: "Add Single Face",
+          title: "Add Single Person",
         }}
         component={AddSingleFaceFromImages}
       />
       <Tab.Screen
         name="AddMultipleFacesFromImage"
-        options={{ title: "Add Multiple Faces" }}
+        options={{ title: "Add Multiple People" }}
         component={AddMultipleFacesFromImage}
       />
     </Tab.Navigator>

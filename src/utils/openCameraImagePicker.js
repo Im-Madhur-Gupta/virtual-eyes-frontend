@@ -3,7 +3,7 @@ import {
   launchCameraAsync,
 } from "expo-image-picker";
 
-let openCameraImagePicker = async (setSelectedImage) => {
+const openCameraImagePicker = async () => {
   let permissionCamera = await requestCameraPermissionsAsync();
 
   if (permissionCamera.granted === false) {
@@ -17,11 +17,11 @@ let openCameraImagePicker = async (setSelectedImage) => {
     return;
   }
 
-  setSelectedImage({
+  return {
     filename: cameraResult.uri.split("\\").pop().split("/").pop(),
     type: "image/jpeg",
     uri: cameraResult.uri,
-  });
+  };
 };
 
 export default openCameraImagePicker;

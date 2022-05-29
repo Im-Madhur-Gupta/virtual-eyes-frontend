@@ -28,7 +28,7 @@ const AddFaceSubtitle = ({ styles }) => {
       </Box>
 
       <Text
-        color={globalStyles.colors.purple}
+        color={globalStyles.colors.primary}
         fontFamily="Poppins_700Bold"
         paddingY={2}
         fontSize={20}
@@ -54,7 +54,7 @@ const AddFaceSubtitle = ({ styles }) => {
       </Box>
 
       <Text
-        color={globalStyles.colors.purple}
+        color={globalStyles.colors.primary}
         fontFamily="Poppins_700Bold"
         paddingTop={6}
         fontSize={20}

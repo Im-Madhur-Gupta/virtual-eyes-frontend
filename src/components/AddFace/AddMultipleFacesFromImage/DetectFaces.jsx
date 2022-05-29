@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Button, Flex, Image, Text, Heading, ScrollView } from "native-base";
+import { Button, Flex, Image, Text, ScrollView, Center } from "native-base";
 
 import MediaAccessibiltyBtns from "../../../layouts/MediaAccessiblityBtns";
 
-import LoadingSpinner from "../../LoadingSpinner";
+import globalStyles from "../../../layouts/globalStyleSheet";
 
 import AxiosInstance from "../../../services/AxiosInstance";
 import createFormData from "../../../utils/createFormData";
@@ -22,8 +22,9 @@ const DetectFaces = ({ navigation }) => {
       console.log("cancelled");
     });
 
-  const openCameraHandler = () => {
-    openCameraImagePicker(setSelectedImage);
+  const openCameraHandler = async () => {
+    const capturedImage = openCameraImagePicker();
+    setSelectedImage(capturedImage);
   };
   const openGalleryHandler = () => {
     setShowGalleryImagePicker(true);
@@ -76,46 +77,33 @@ const DetectFaces = ({ navigation }) => {
     }
   };
   return (
-    <>
+    <Flex style={globalStyles.flexContainerColumn}>
       {showGalleryImagePicker ? (
         GallerImagePicker
       ) : (
-        <ScrollView
-          maxW="100%"
-          h="80"
-          _contentContainerStyle={{
-            px: "20px",
-            mb: "4",
-            minW: "72",
-          }}
-        >
-          <Flex width="100%" height="100%" align="center">
-            <Heading>Selected Image</Heading>
-
+        <>
+          <Center style={globalStyles.selectedImageContainer}>
             {selectedImage ? (
               <Image
-                alt={selectedImage.filename}
                 source={{ uri: selectedImage.uri }}
-                style={{
-                  width: 200,
-                  height: 200,
-                  resizeMode: "cover",
-                }}
+                style={globalStyles.selectedImage}
               />
             ) : (
-              <Text>You havent selected any image yet.</Text>
+              <Text style={globalStyles.infoText}>Please select an image.</Text>
             )}
+          </Center>
 
-            <MediaAccessibiltyBtns
-              onOpenCamera={openCameraHandler}
-              onOpenGallery={openGalleryHandler}
-            />
+          <MediaAccessibiltyBtns
+            onOpenCamera={openCameraHandler}
+            onOpenGallery={openGalleryHandler}
+          />
 
-            <Button onPress={detectFacesHandler}>Detect Faces</Button>
-          </Flex>
-        </ScrollView>
+          <Button onPress={detectFacesHandler} style={globalStyles.primaryBtn}>
+            <Text style={globalStyles.primaryBtnTxt}>Extract Faces</Text>
+          </Button>
+        </>
       )}
-    </>
+    </Flex>
   );
 };
 

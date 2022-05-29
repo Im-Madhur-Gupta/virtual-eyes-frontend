@@ -26,6 +26,16 @@ const AppNavigator = () => {
     <Drawer.Navigator
       screenOptions={{
         tabBarLabelStyle: { textTransform: "none" },
+        drawerStyle: {
+          paddingTop: 30,
+          width: "80%",
+        },
+        drawerLabelStyle: {
+          fontSize: 18,
+        },
+        headerTitleStyle: {
+          fontSize: 21,
+        },
       }}
       drawerContent={(props) => <CustomDrawerContent {...props} />}
       useLegacyImplementation={true}
@@ -34,21 +44,21 @@ const AppNavigator = () => {
       <Drawer.Screen
         name="VisualizeImage"
         options={{
-          title: "Visualize An Image",
+          title: "Visualize an Image",
         }}
         component={VisualizeImage}
       />
       <Drawer.Screen
         name="AddFace"
         options={{
-          title: "Add Face To My Group",
+          title: "Add People To My Group",
         }}
         component={AddFace}
       />
       <Drawer.Screen
         name="FindFaces"
         options={{
-          title: "Find Faces From My Group",
+          title: "Find People in an Image",
         }}
         component={FindFaces}
       />

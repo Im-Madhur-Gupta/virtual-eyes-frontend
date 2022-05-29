@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Flex, Button, Text, Image, Center } from "native-base";
 
-import styles from "../../layouts/globalStyleSheet";
 import MediaAccessibiltyBtns from "../../layouts/MediaAccessiblityBtns";
 
 import AxiosInstance from "../../services/AxiosInstance";
@@ -9,6 +8,7 @@ import createFormData from "../../utils/createFormData";
 import openCameraImagePicker from "../../utils/openCameraImagePicker";
 import useGalleryImagePicker from "../../hooks/useGalleryImagePicker";
 import useStore from "../../store/user-store";
+import globalStyles from "../../layouts/globalStyleSheet";
 
 const VisualizeImage = () => {
   const setIsLoading = useStore((state) => state.setIsLoading);
@@ -20,8 +20,9 @@ const VisualizeImage = () => {
       console.log("cancelled");
     });
 
-  const openCameraHandler = () => {
-    openCameraImagePicker(setSelectedImage);
+  const openCameraHandler = async () => {
+    const capturedImage = openCameraImagePicker();
+    setSelectedImage(capturedImage);
   };
   const openGalleryHandler = () => {
     setShowGalleryImagePicker(true);
@@ -62,38 +63,44 @@ const VisualizeImage = () => {
     }
   };
   return (
-    <Flex style={styles.flexContainerColumn}>
+    <Flex style={globalStyles.flexContainerColumn}>
       {showGalleryImagePicker ? (
         GallerImagePicker
       ) : (
         <>
-          <Center style={styles.selectedImageContainer}>
+          <Center style={globalStyles.selectedImageContainer}>
             {selectedImage ? (
               <Image
                 source={{ uri: selectedImage.uri }}
-                style={styles.selectedImage}
+                style={globalStyles.selectedImage}
               />
             ) : (
-              <Text>Please select an image.</Text>
+              <Text style={globalStyles.infoText}>Please select an image.</Text>
             )}
           </Center>
 
-          <Center>
-            <MediaAccessibiltyBtns
-              onOpenCamera={openCameraHandler}
-              onOpenGallery={openGalleryHandler}
-            />
-            <Button onPress={describeImageHandler}>Describe Image</Button>
-          </Center>
+          <MediaAccessibiltyBtns
+            onOpenCamera={openCameraHandler}
+            onOpenGallery={openGalleryHandler}
+          />
 
-          <Center style={styles.resultContainer}>
-            <Text>Description of the Image</Text>
-            {imageDescription ? (
-              <Text>{imageDescription.description}</Text>
-            ) : (
-              <Text>Please select an image.</Text>
+          <Center style={globalStyles.resultContainer}>
+            <Text style={globalStyles.infoText}>
+              Description of the Image
+            </Text>
+            {imageDescription && (
+              <Text style={globalStyles.resultText}>
+                {imageDescription.description}
+              </Text>
             )}
           </Center>
+
+          <Button
+            onPress={describeImageHandler}
+            style={globalStyles.primaryBtn}
+          >
+            <Text style={globalStyles.primaryBtnTxt}>Visualize Image</Text>
+          </Button>
         </>
       )}
     </Flex>

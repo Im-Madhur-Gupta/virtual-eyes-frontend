@@ -1,17 +1,26 @@
 import { useState } from "react";
-import { Button, Flex, Text, useToast, Heading } from "native-base";
+import { Dimensions, Keyboard, TouchableWithoutFeedback } from "react-native";
+import {
+  Center,
+  Flex,
+  Text,
+  useToast,
+  Heading,
+  KeyboardAvoidingView,
+  ScrollView,
+} from "native-base";
 
 import AddFaceForm from "../../AddFaceForm";
 
 import MediaAccessibiltyBtns from "../../../layouts/MediaAccessiblityBtns";
-import styles from "../../../layouts/globalStyleSheet";
 
 import openCameraImagePicker from "../../../utils/openCameraImagePicker";
 import useGalleryImagePicker from "../../../hooks/useGalleryImagePicker";
 import addFaceToPersonGroup from "../../../utils/addFaceToPersonGroup";
 import FaceImageCarousel from "./FaceImageCarousel";
-import LoadingSpinner from "../../LoadingSpinner";
 import useStore from "../../../store/user-store";
+
+import globalStyles from "../../../layouts/globalStyleSheet";
 
 /**
  * This component will be used to add a single face present in multiple images to a person group.
@@ -34,8 +43,9 @@ const AddSingleFaceFromImages = () => {
     });
 
   // change handler functions
-  const openCameraHandler = () => {
-    openCameraImagePicker(setSelectedImages);
+  const openCameraHandler = async () => {
+    const capturedImage = await openCameraImagePicker();
+    setSelectedImages([capturedImage]);
   };
   const openGalleryHandler = () => {
     setShowGalleryImagePicker(true);
@@ -55,28 +65,42 @@ const AddSingleFaceFromImages = () => {
     }
   };
   return (
-    <Flex width="100%" height="100%">
+    <>
       {showGalleryImagePicker ? (
         GallerImagePicker
       ) : (
-        <>
-          <Heading>Selected Images</Heading>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={{
+            flex: 1,
+          }}
+          keyboardVerticalOffset={Dimensions.get("window").height * 0.2}
+        >
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <ScrollView>
+              <Flex style={globalStyles.flexContainerColumn}>
+                <Flex align="center" justify="center" width={450} height={450}>
+                  {selectedImages.length > 0 ? (
+                    <FaceImageCarousel images={selectedImages} />
+                  ) : (
+                    <Text style={globalStyles.infoText}>
+                      Please select an image.
+                    </Text>
+                  )}
+                </Flex>
 
-          {selectedImages.length > 0 ? (
-            <FaceImageCarousel images={selectedImages} />
-          ) : (
-            <Text>You havent selected any images yet.</Text>
-          )}
+                <MediaAccessibiltyBtns
+                  onOpenCamera={openCameraHandler}
+                  onOpenGallery={openGalleryHandler}
+                />
 
-          <MediaAccessibiltyBtns
-            onOpenCamera={openCameraHandler}
-            onOpenGallery={openGalleryHandler}
-          />
-
-          <AddFaceForm onAddFace={addFaceHandler} />
-        </>
+                <AddFaceForm onAddFace={addFaceHandler} />
+              </Flex>
+            </ScrollView>
+          </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
       )}
-    </Flex>
+    </>
   );
 };
 

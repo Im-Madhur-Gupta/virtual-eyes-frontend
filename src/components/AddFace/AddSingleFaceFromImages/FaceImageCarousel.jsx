@@ -8,7 +8,7 @@ const FaceImageCarousel = ({ images }) => {
   const [index, setIndex] = useState(0);
   const isCarousel = useRef(null);
   return (
-    <Flex align="center" justify="center" padding="50">
+    <>
       <Carousel
         layout="stack"
         layoutCardOffset={18}
@@ -35,8 +35,9 @@ const FaceImageCarousel = ({ images }) => {
         inactiveDotOpacity={0.4}
         inactiveDotScale={0.6}
         tappableDots={true}
+        // paddingBottom={0}
       />
-    </Flex>
+    </>
   );
 };
 

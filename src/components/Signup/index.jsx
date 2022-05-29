@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Dimensions } from "react-native";
+import { Dimensions, Keyboard, TouchableWithoutFeedback } from "react-native";
 import {
+  KeyboardAvoidingView,
   Heading,
   VStack,
   FormControl,
@@ -8,8 +9,9 @@ import {
   Button,
   HStack,
   Text,
-  Flex,
   useToast,
+  Flex,
+  ScrollView,
 } from "native-base";
 import { Link } from "@react-navigation/native";
 
@@ -19,6 +21,7 @@ import Animation from "../Animation";
 import AxiosInstance from "../../services/AxiosInstance";
 import useStore from "../../store/user-store";
 import styles from "../../layouts/globalStyleSheet";
+import globalStyles from "../../layouts/globalStyleSheet";
 
 const Register = () => {
   const setIsLoading = useStore((state) => state.setIsLoading);
@@ -41,7 +44,7 @@ const Register = () => {
     setPassword(password);
   };
 
-  const registerHandler = async () => {
+  const signupHandler = async () => {
     setIsLoading(true);
     try {
       const response = await AxiosInstance.post(
@@ -76,92 +79,106 @@ const Register = () => {
     }
   };
   return (
-    <Flex w="100%">
-      <Flex
-        style={{
-          height: Dimensions.get("window").height / 3,
-          backgroundColor: styles.colors.purple,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Animation
-          source={authAnimation}
-          style={{
-            width: 200,
-            height: 200,
-          }}
-        />
-      </Flex>
-      <Flex
-        direction="column"
-        justify="center"
-        safeArea
-        px="10"
-        py="8"
-        w="100%"
-      >
-        <Heading
-          size="lg"
-          textAlign="center"
-          color="coolGray.800"
-          _dark={{
-            color: "warmGray.50",
-          }}
-          fontWeight="semibold"
-        >
-          Sign Up
-        </Heading>
-        <VStack space={3} mt="5">
-          <FormControl isRequired>
-            <FormControl.Label>Name</FormControl.Label>
-            <Input onChangeText={nameChangeHandler} value={name} />
-          </FormControl>
-
-          <FormControl isRequired>
-            <FormControl.Label>Email</FormControl.Label>
-            <Input onChangeText={emailChangeHandler} value={email} />
-          </FormControl>
-
-          <FormControl isRequired>
-            <FormControl.Label>Password</FormControl.Label>
-            <Input
-              onChangeText={passwordChangeHandler}
-              value={password}
-              type="password"
-            />
-          </FormControl>
-
-          <Button mt="2" colorScheme="indigo" onPress={registerHandler}>
-            Sign up
-          </Button>
-          <HStack mt="6" justifyContent="center">
-            <Text
-              fontSize="md"
-              color="coolGray.600"
-              _dark={{
-                color: "warmGray.200",
-              }}
-              paddingRight="2"
-            >
-              Already a user?
-            </Text>
-            <Link
-              to={{ screen: "Login" }}
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{
+        flex: 1,
+      }}
+      keyboardVerticalOffset={Dimensions.get("window").height * 0.03}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <ScrollView>
+          <Flex w="100%">
+            <Flex
               style={{
-                color: styles.colors.purple,
-                fontWeight: "500",
-                fontSize: 16,
-                textDecorationLine: "underline",
+                height: Dimensions.get("window").height / 3,
+                backgroundColor: styles.colors.primary,
+                justifyContent: "center",
+                alignItems: "center",
               }}
-              href="#"
             >
-              Login
-            </Link>
-          </HStack>
-        </VStack>
-      </Flex>
-    </Flex>
+              <Animation
+                source={authAnimation}
+                style={{
+                  width: 200,
+                  height: 200,
+                }}
+              />
+            </Flex>
+            <Flex
+              direction="column"
+              justify="center"
+              safeArea
+              px="10"
+              py="8"
+              w="100%"
+            >
+              <Heading
+                fontFamily="Poppins_700Bold"
+                size="lg"
+                textAlign="center"
+                color="coolGray.800"
+                _dark={{
+                  color: "warmGray.50",
+                }}
+                fontWeight="semibold"
+              >
+                Sign Up
+              </Heading>
+              <VStack space={3} mt="5">
+                <FormControl isRequired>
+                  <FormControl.Label>Name</FormControl.Label>
+                  <Input onChangeText={nameChangeHandler} value={name} />
+                </FormControl>
+
+                <FormControl isRequired>
+                  <FormControl.Label>Email</FormControl.Label>
+                  <Input onChangeText={emailChangeHandler} value={email} />
+                </FormControl>
+
+                <FormControl isRequired>
+                  <FormControl.Label>Password</FormControl.Label>
+                  <Input
+                    onChangeText={passwordChangeHandler}
+                    value={password}
+                    type="password"
+                  />
+                </FormControl>
+
+                <Button style={globalStyles.primaryBtn} onPress={signupHandler}>
+                  <Text style={globalStyles.primaryBtnTxt}>Sign up</Text>
+                </Button>
+
+                <HStack mt="6" justifyContent="center">
+                  <Text
+                    fontSize="md"
+                    color="coolGray.600"
+                    _dark={{
+                      color: "warmGray.200",
+                    }}
+                    paddingRight="2"
+                  >
+                    Already a user?
+                  </Text>
+                  <Link
+                    to={{ screen: "Login" }}
+                    style={{
+                      color: styles.colors.primary,
+                      fontWeight: "500",
+                      fontSize: 16,
+                      textDecorationLine: "underline",
+                    }}
+                    href="#"
+                  >
+                    Login
+                  </Link>
+                </HStack>
+              </VStack>
+            </Flex>
+          </Flex>
+        </ScrollView>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };
 

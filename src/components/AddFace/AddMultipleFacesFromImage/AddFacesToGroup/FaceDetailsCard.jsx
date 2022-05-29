@@ -1,18 +1,18 @@
 import React from "react";
-import { View, StyleSheet, Dimensions } from "react-native";
-import { Image, Text, useToast } from "native-base";
+import { StyleSheet, Dimensions } from "react-native";
+import { Flex, Image, Text } from "native-base";
 
 import useStore from "../../../../store/user-store";
 
 import AddFaceForm from "../../../AddFaceForm";
 import addFaceToPersonGroup from "../../../../utils/addFaceToPersonGroup";
+import globalStyles from "../../../../layouts/globalStyleSheet";
 
 export const SLIDER_WIDTH = Dimensions.get("window").width + 80;
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 
 const FaceDetailsCard = ({ item: face, index }) => {
   const setIsLoading = useStore.getState().setIsLoading;
-  // const toast = useToast();
 
   // Parsing the face attributes so that it can be displayed to the user
   const ageTextComponent = (
@@ -21,7 +21,9 @@ const FaceDetailsCard = ({ item: face, index }) => {
 
   // Get the accessories of the face
   const accessories = face.faceAttributes.accessories
-    .map((accessory) => accessory.type)
+    .map((accessory) => {
+      if (accessory.type !== "glasses") return accessory.type;
+    })
     .join();
   const accessoriesTextComponent = (
     <Text style={styles.body}>
@@ -124,10 +126,12 @@ const FaceDetailsCard = ({ item: face, index }) => {
   };
 
   return (
-    <View style={styles.container} key={index}>
-      <Image source={{ uri: face.cropData.uri }} style={styles.image} />
-
-      <AddFaceForm onAddFace={addFaceHandler} />
+    <Flex justify="center" align="center" style={styles.container} key={index}>
+      <Image
+        source={{ uri: face.cropData.uri }}
+        borderTopRadius={20}
+        style={styles.image}
+      />
 
       {/* Face describing components start from here */}
       {ageTextComponent}
@@ -136,14 +140,18 @@ const FaceDetailsCard = ({ item: face, index }) => {
       {facialHairTextComponent}
       {glassesTextComponent}
       {hairTextComponent}
-    </View>
+
+      <AddFaceForm containerPaddingY={1} onAddFace={addFaceHandler} />
+
+      
+    </Flex>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    borderRadius: 20,
     backgroundColor: "white",
-    borderRadius: 8,
     width: ITEM_WIDTH,
     paddingBottom: 40,
     shadowColor: "#000",
@@ -159,19 +167,11 @@ const styles = StyleSheet.create({
     width: ITEM_WIDTH,
     height: 300,
   },
-  header: {
-    color: "#222",
-    fontSize: 28,
-    fontWeight: "bold",
-    paddingLeft: 20,
-    paddingTop: 20,
-  },
   body: {
-    color: "#222",
-    fontSize: 18,
-    paddingLeft: 20,
-    paddingLeft: 20,
-    paddingRight: 20,
+    ...globalStyles.resultText,
+    textAlign: "left",
+    marginTop: 10,
+    paddingVertical: 0,
   },
 });
 

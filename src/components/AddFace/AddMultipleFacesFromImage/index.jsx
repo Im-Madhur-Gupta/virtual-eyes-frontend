@@ -16,7 +16,11 @@ const Stack = createStackNavigator();
  */
 const AddMultipleFacesFromImage = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <Stack.Screen name="DetectFaces" component={DetectFaces} />
       <Stack.Screen name="AddFacesToGroup" component={AddFacesToGroup} />
     </Stack.Navigator>
