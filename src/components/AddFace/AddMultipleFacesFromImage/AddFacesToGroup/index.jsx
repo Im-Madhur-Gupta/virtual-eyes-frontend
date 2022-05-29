@@ -59,11 +59,12 @@ const AddFacesToGroup = ({ navigation }) => {
             <Fab
               accessibilityLabel="Go Back"
               renderInPortal={false}
-              bottom={100}
+              placement="bottom-left"
+              bottom={125}
               shadow={2}
               size="sm"
               backgroundColor={globalStyles.colors.primary}
-              icon={<Ionicons name="arrow-back" size={24} color="white" />}
+              icon={<Ionicons name="arrow-back" size={20} color="white" />}
               onPress={() => {
                 navigation.goBack();
               }}

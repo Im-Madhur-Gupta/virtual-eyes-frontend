@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button, Flex, FormControl, Input, Text, useToast } from "native-base";
 import globalStyles from "../../layouts/globalStyleSheet";
 
-const AddFaceForm = ({ onAddFace, containerPaddingY = 5 }) => {
+const AddFaceForm = ({ onAddFace, containerPaddingY = 3 }) => {
   const toast = useToast();
 
   const [facename, setFacename] = useState("");
