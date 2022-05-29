@@ -57,6 +57,7 @@ const AddFacesToGroup = ({ navigation }) => {
             />
 
             <Fab
+              accessibilityLabel="Go Back"
               renderInPortal={false}
               bottom={100}
               shadow={2}

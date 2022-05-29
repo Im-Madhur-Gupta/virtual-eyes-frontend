@@ -32,7 +32,7 @@ const globalStyles = StyleSheet.create({
     marginTop: 15,
     paddingHorizontal: 15,
     paddingVertical: 10,
-    textDecorationLine: 'underline'
+    textDecorationLine: "underline",
   },
   infoText: {
     fontFamily: "Poppins_400Regular",
@@ -64,6 +64,13 @@ const globalStyles = StyleSheet.create({
     fontFamily: "Poppins_400Regular",
     color: "white",
     paddingVertical: 5,
+  },
+  input: {
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderColor: "lightgray",
+    borderWidth: 1,
+    borderRadius: 5,
   },
 });
 

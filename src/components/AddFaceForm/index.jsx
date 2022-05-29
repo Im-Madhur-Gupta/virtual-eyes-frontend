@@ -18,6 +18,8 @@ const AddFaceForm = ({ onAddFace, containerPaddingY = 5 }) => {
           <Text style={globalStyles.infoText}>Enter Name</Text>
         </FormControl.Label>
         <Input
+          placeholder="Enter Name"
+          placeholderTextColor="#f2f2f2"
           onChangeText={facenameChangeHandler}
           value={facename}
           width="80%"

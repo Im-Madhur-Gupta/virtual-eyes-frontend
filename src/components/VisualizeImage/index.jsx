@@ -23,7 +23,7 @@ const VisualizeImage = () => {
     });
 
   const openCameraHandler = async () => {
-    const capturedImage = openCameraImagePicker();
+    const capturedImage = await openCameraImagePicker();
     setSelectedImage(capturedImage);
   };
   const openGalleryHandler = () => {

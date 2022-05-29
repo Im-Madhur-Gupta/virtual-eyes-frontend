@@ -5,7 +5,6 @@ import {
   Heading,
   VStack,
   FormControl,
-  Input,
   Button,
   HStack,
   Text,
@@ -13,6 +12,7 @@ import {
   Flex,
   ScrollView,
 } from "native-base";
+import { TextInput } from "react-native";
 import { Link } from "@react-navigation/native";
 
 import AxiosInstance from "../../services/AxiosInstance";
@@ -123,14 +123,22 @@ const Login = () => {
               <VStack space={3} mt="5">
                 <FormControl>
                   <FormControl.Label>Email ID</FormControl.Label>
-                  <Input onChangeText={emailChangeHandler} value={email} />
+                  <TextInput
+                    accessibilityLabel="Email ID"
+                    style={globalStyles.input}
+                    onChangeText={emailChangeHandler}
+                    value={email}
+                  />
                 </FormControl>
+
                 <FormControl>
                   <FormControl.Label>Password</FormControl.Label>
-                  <Input
+                  <TextInput
+                    accessibilityLabel="Password"
+                    style={globalStyles.input}
                     onChangeText={passwordChangeHandler}
                     value={password}
-                    type="password"
+                    textContentType="password"
                   />
                 </FormControl>
                 <Button style={globalStyles.primaryBtn} onPress={loginHandler}>

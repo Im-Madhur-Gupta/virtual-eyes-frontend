@@ -9,7 +9,7 @@ import Animation from "../Animation";
 import AddFaceSubtitle from "./AddFaceSubtitle";
 
 const styles = StyleSheet.create({
-  doneButton: { marginRight: 20 },
+  doneButton: { marginRight: 20, padding: 5 },
   doneText: { fontSize: 18 },
   titleText: {
     fontSize: 26,
@@ -101,7 +101,13 @@ const Onboard = ({ navigation }) => {
       titleStyles={styles.titleText}
       subTitleStyles={styles.subtitleText}
       bottomBarHighlight={false}
-      {...{ pages, onDone, onSkip, DoneButtonComponent }}
+      bottomBarHeight={80}
+      {...{
+        pages,
+        onDone,
+        onSkip,
+        DoneButtonComponent,
+      }}
     />
   );
 };

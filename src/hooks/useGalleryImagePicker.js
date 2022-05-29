@@ -130,7 +130,7 @@ function useGalleryImagePicker(allowMultipleSelection, onSave, onCancel) {
       }}
       onSave={onSaveHandler}
       onCancel={onCancelHandler}
-      galleryColumns={4}
+      galleryColumns={3}
       multiple={allowMultipleSelection}
     />,
   ];

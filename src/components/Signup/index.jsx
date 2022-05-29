@@ -5,7 +5,6 @@ import {
   Heading,
   VStack,
   FormControl,
-  Input,
   Button,
   HStack,
   Text,
@@ -13,6 +12,7 @@ import {
   Flex,
   ScrollView,
 } from "native-base";
+import { TextInput } from "react-native";
 import { Link } from "@react-navigation/native";
 
 import authAnimation from "../../assets/animations/auth.json";
@@ -128,20 +128,32 @@ const Register = () => {
               <VStack space={3} mt="5">
                 <FormControl isRequired>
                   <FormControl.Label>Name</FormControl.Label>
-                  <Input onChangeText={nameChangeHandler} value={name} />
+                  <TextInput
+                    accessibilityLabel="name"
+                    style={globalStyles.input}
+                    onChangeText={nameChangeHandler}
+                    value={name}
+                  />
                 </FormControl>
 
                 <FormControl isRequired>
-                  <FormControl.Label>Email</FormControl.Label>
-                  <Input onChangeText={emailChangeHandler} value={email} />
+                  <FormControl.Label>Email ID</FormControl.Label>
+                  <TextInput
+                    accessibilityLabel="Email ID"
+                    style={globalStyles.input}
+                    onChangeText={emailChangeHandler}
+                    value={email}
+                  />
                 </FormControl>
 
                 <FormControl isRequired>
                   <FormControl.Label>Password</FormControl.Label>
-                  <Input
+                  <TextInput
+                    accessibilityLabel="Password"
+                    style={globalStyles.input}
                     onChangeText={passwordChangeHandler}
                     value={password}
-                    type="password"
+                    textContentType="password"
                   />
                 </FormControl>
 
