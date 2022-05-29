@@ -1,18 +1,11 @@
 import { useState } from "react";
-import {
-  Button,
-  Flex,
-  Image,
-  Text,
-  Center,
-  useToast,
-} from "native-base";
+import { Button, Flex, Image, Text, Center, useToast } from "native-base";
 
 import MediaAccessibiltyBtns from "../../../layouts/MediaAccessiblityBtns";
 
 import globalStyles from "../../../layouts/globalStyleSheet";
 
-import AxiosInstance from "../../../services/AxiosInstance";
+import axiosInstance from "../../../services/AxiosInstance.js.temp";
 import createFormData from "../../../utils/createFormData";
 import openCameraImagePicker from "../../../utils/openCameraImagePicker";
 import useGalleryImagePicker from "../../../hooks/useGalleryImagePicker";
@@ -49,7 +42,7 @@ const DetectFaces = ({ navigation }) => {
         const formData = createFormData(selectedImage, "image");
         console.log("DetectFaces - FORM DATA - ", formData);
 
-        const res = await AxiosInstance.post("/detect-faces", formData, {
+        const res = await axiosInstance.post("/detect-faces", formData, {
           headers: {
             "Content-Type": `multipart/form-data`,
             transformRequest: (data) => {

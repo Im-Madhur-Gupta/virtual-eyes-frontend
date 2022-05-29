@@ -12,7 +12,7 @@ import {
 import globalStyles from "../../layouts/globalStyleSheet";
 import MediaAccessibiltyBtns from "../../layouts/MediaAccessiblityBtns";
 
-import AxiosInstance from "../../services/AxiosInstance";
+import axiosInstance from "../../services/AxiosInstance.js.temp";
 import createFormData from "../../utils/createFormData";
 import openCameraImagePicker from "../../utils/openCameraImagePicker";
 import useGalleryImagePicker from "../../hooks/useGalleryImagePicker";
@@ -51,7 +51,7 @@ const FindFaces = () => {
         const formData = createFormData(selectedImage, "image");
         console.log("FindFaces - DATA - ", formData);
 
-        const response = await AxiosInstance.post(
+        const response = await axiosInstance.post(
           "/match-face/find-faces",
           formData,
           {

@@ -15,7 +15,7 @@ import {
 import { TextInput } from "react-native";
 import { Link } from "@react-navigation/native";
 
-import AxiosInstance from "../../services/AxiosInstance";
+import axiosInstance from "../../services/AxiosInstance.js.temp";
 import useStore from "../../store/user-store";
 import Animation from "../Animation";
 import styles from "../../layouts/globalStyleSheet";
@@ -42,7 +42,7 @@ const Login = () => {
   const loginHandler = async () => {
     setIsLoading(true);
     try {
-      const response = await AxiosInstance.post(
+      const response = await axiosInstance.post(
         "/login",
         JSON.stringify({
           email,

@@ -3,7 +3,7 @@ import { Flex, Button, Text, Image, Center, useToast } from "native-base";
 
 import MediaAccessibiltyBtns from "../../layouts/MediaAccessiblityBtns";
 
-import AxiosInstance from "../../services/AxiosInstance";
+import axiosInstance from "../../services/AxiosInstance.js.temp";
 import createFormData from "../../utils/createFormData";
 import openCameraImagePicker from "../../utils/openCameraImagePicker";
 import useGalleryImagePicker from "../../hooks/useGalleryImagePicker";
@@ -40,7 +40,7 @@ const VisualizeImage = () => {
         const formData = createFormData(selectedImage, "image");
         console.log("DescribeImage - FORM DATA - ", formData);
 
-        const response = await AxiosInstance.post(
+        const response = await axiosInstance.post(
           "/visualize-image",
           formData,
           {

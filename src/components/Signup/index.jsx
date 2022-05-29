@@ -18,7 +18,7 @@ import { Link } from "@react-navigation/native";
 import authAnimation from "../../assets/animations/auth.json";
 
 import Animation from "../Animation";
-import AxiosInstance from "../../services/AxiosInstance";
+import axiosInstance from "../../services/AxiosInstance.js.temp";
 import useStore from "../../store/user-store";
 import styles from "../../layouts/globalStyleSheet";
 import globalStyles from "../../layouts/globalStyleSheet";
@@ -47,7 +47,7 @@ const Register = () => {
   const signupHandler = async () => {
     setIsLoading(true);
     try {
-      const response = await AxiosInstance.post(
+      const response = await axiosInstance.post(
         "/register",
         JSON.stringify({
           email,

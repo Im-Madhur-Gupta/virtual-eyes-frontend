@@ -1,4 +1,4 @@
-import AxiosInstance from "../services/AxiosInstance";
+import axiosInstance from "../services/AxiosInstance.js.temp";
 import createFormData from "./createFormData";
 
 const addFaceToPersonGroup = async (
@@ -16,7 +16,7 @@ const addFaceToPersonGroup = async (
     );
     console.log("addFaceToPersonGroup - formData", formData);
 
-    const response = await AxiosInstance.post(
+    const response = await axiosInstance.post(
       "/match-face/add-face",
       formData,
       {
