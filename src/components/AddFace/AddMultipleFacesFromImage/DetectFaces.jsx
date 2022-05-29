@@ -5,7 +5,7 @@ import MediaAccessibiltyBtns from "../../../layouts/MediaAccessiblityBtns";
 
 import globalStyles from "../../../layouts/globalStyleSheet";
 
-import axiosInstance from "../../../services/AxiosInstance.js.temp";
+import axiosInstance from "../../../services/axiosInstance.js";
 import createFormData from "../../../utils/createFormData";
 import openCameraImagePicker from "../../../utils/openCameraImagePicker";
 import useGalleryImagePicker from "../../../hooks/useGalleryImagePicker";

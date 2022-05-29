@@ -18,7 +18,7 @@ import { Link } from "@react-navigation/native";
 import authAnimation from "../../assets/animations/auth.json";
 
 import Animation from "../Animation";
-import axiosInstance from "../../services/AxiosInstance.js.temp";
+import axiosInstance from "../../services/axiosInstance.js";
 import useStore from "../../store/user-store";
 import styles from "../../layouts/globalStyleSheet";
 import globalStyles from "../../layouts/globalStyleSheet";

@@ -15,7 +15,7 @@ import {
 import { TextInput } from "react-native";
 import { Link } from "@react-navigation/native";
 
-import axiosInstance from "../../services/AxiosInstance.js.temp";
+import axiosInstance from "../../services/axiosInstance.js";
 import useStore from "../../store/user-store";
 import Animation from "../Animation";
 import styles from "../../layouts/globalStyleSheet";

@@ -1,4 +1,4 @@
-import axiosInstance from "../services/AxiosInstance.js.temp";
+import axiosInstance from "../services/axiosInstance.js";
 import createFormData from "./createFormData";
 
 const addFaceToPersonGroup = async (
