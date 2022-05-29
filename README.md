@@ -11,4 +11,6 @@ Make sure you have an Android Device connected to your computer with adb drivers
 
 ### Tech Stack - React Native.
 
+### Curious? Go [here.](https://drive.google.com/drive/folders/1hLi-MbIGAwWYQQbRT3YMrPbqF_7SV_Ty?usp=sharing)
+
 Made with Love ❤️, Respect 🙏 and Passion 👨🏽‍💻.
