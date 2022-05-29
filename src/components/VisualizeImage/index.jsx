@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Flex, Button, Text, Image, Center } from "native-base";
+import { Flex, Button, Text, Image, Center, useToast } from "native-base";
 
 import MediaAccessibiltyBtns from "../../layouts/MediaAccessiblityBtns";
 
@@ -11,6 +11,8 @@ import useStore from "../../store/user-store";
 import globalStyles from "../../layouts/globalStyleSheet";
 
 const VisualizeImage = () => {
+  const toast = useToast();
+
   const setIsLoading = useStore((state) => state.setIsLoading);
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageDescription, setImageDescription] = useState(null);
@@ -59,6 +61,9 @@ const VisualizeImage = () => {
       }
     } catch (err) {
       setIsLoading(false);
+      toast.show({
+        description: "Something went wrong, please try again.",
+      });
       console.log(err);
     }
   };
@@ -85,9 +90,7 @@ const VisualizeImage = () => {
           />
 
           <Center style={globalStyles.resultContainer}>
-            <Text style={globalStyles.infoText}>
-              Description of the Image
-            </Text>
+            <Text style={globalStyles.infoText}>Description of the Image</Text>
             {imageDescription && (
               <Text style={globalStyles.resultText}>
                 {imageDescription.description}

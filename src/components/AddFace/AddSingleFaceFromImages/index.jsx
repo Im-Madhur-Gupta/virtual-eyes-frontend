@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { Dimensions, Keyboard, TouchableWithoutFeedback } from "react-native";
 import {
-  Center,
   Flex,
   Text,
   useToast,
-  Heading,
   KeyboardAvoidingView,
   ScrollView,
 } from "native-base";
@@ -57,9 +55,12 @@ const AddSingleFaceFromImages = () => {
         setIsLoading(true);
         await addFaceToPersonGroup(selectedImages, facename);
         setIsLoading(false);
-        toast.show({ description: "Face will be added shortly." });
+        toast.show({ description: "Person has been added to your group." });
       } catch (err) {
         setIsLoading(false);
+        toast.show({
+          description: "Something went wrong, please try again.",
+        });
         console.log(err);
       }
     }

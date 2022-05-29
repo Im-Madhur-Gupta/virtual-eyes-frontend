@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { Button, Flex, FormControl, Input, Text } from "native-base";
+import { Button, Flex, FormControl, Input, Text, useToast } from "native-base";
 import globalStyles from "../../layouts/globalStyleSheet";
 
 const AddFaceForm = ({ onAddFace, containerPaddingY = 5 }) => {
+  const toast = useToast();
+
   const [facename, setFacename] = useState("");
 
   const facenameChangeHandler = (facename) => {
@@ -23,7 +25,7 @@ const AddFaceForm = ({ onAddFace, containerPaddingY = 5 }) => {
         />
       </FormControl>
       <Button
-        onPress={() => onAddFace(facename)}
+        onPress={() => onAddFace(facename, toast)}
         style={globalStyles.primaryBtn}
       >
         <Text style={globalStyles.primaryBtnTxt}>Add Person</Text>

@@ -68,6 +68,18 @@ const Home = () => {
         style={{
           ...globalStyles.infoText,
           fontSize: 18,
+          textAlign: "center",
+          marginTop: 30,
+        }}
+      >
+        Note - As of now this app only supports JPEG, PNG, GIF, or BMP format
+        images for upload.
+      </Text>
+
+      <Text
+        style={{
+          ...globalStyles.infoText,
+          fontSize: 18,
           fontWeight: "700",
           marginTop: 60,
           textAlign: "center",

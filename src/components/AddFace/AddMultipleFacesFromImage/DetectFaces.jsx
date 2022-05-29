@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { Button, Flex, Image, Text, ScrollView, Center } from "native-base";
+import {
+  Button,
+  Flex,
+  Image,
+  Text,
+  Center,
+  useToast,
+} from "native-base";
 
 import MediaAccessibiltyBtns from "../../../layouts/MediaAccessiblityBtns";
 
@@ -13,6 +20,8 @@ import getCroppedImage from "../../../utils/getCroppedImage";
 import useStore from "../../../store/user-store";
 
 const DetectFaces = ({ navigation }) => {
+  const toast = useToast();
+
   const setIsLoading = useStore((state) => state.setIsLoading);
   const setDetectedFaces = useStore((state) => state.setDetectedFaces);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -73,6 +82,9 @@ const DetectFaces = ({ navigation }) => {
       }
     } catch (err) {
       setIsLoading(false);
+      toast.show({
+        description: "Something went wrong, please try again.",
+      });
       console.log(err);
     }
   };

@@ -12,6 +12,7 @@ import globalStyles from "../../../../layouts/globalStyleSheet";
 
 const AddFacesToGroup = ({ navigation }) => {
   const detectedFaces = useStore((state) => state.detectedFaces);
+
   const [index, setIndex] = useState(0);
 
   const isCarousel = useRef(null);
@@ -54,8 +55,10 @@ const AddFacesToGroup = ({ navigation }) => {
               inactiveDotScale={0.6}
               tappableDots={true}
             />
+
             <Fab
-              renderInPortal={true}
+              renderInPortal={false}
+              bottom={100}
               shadow={2}
               size="sm"
               backgroundColor={globalStyles.colors.primary}

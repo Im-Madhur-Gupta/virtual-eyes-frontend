@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { Button, Flex, Image, Text, Center, ScrollView } from "native-base";
+import {
+  Button,
+  Flex,
+  Image,
+  Text,
+  Center,
+  ScrollView,
+  useToast,
+} from "native-base";
 
 import globalStyles from "../../layouts/globalStyleSheet";
 import MediaAccessibiltyBtns from "../../layouts/MediaAccessiblityBtns";
@@ -11,6 +19,8 @@ import useGalleryImagePicker from "../../hooks/useGalleryImagePicker";
 import useStore from "../../store/user-store";
 
 const FindFaces = () => {
+  const toast = useToast();
+
   const setIsLoading = useStore((state) => state.setIsLoading);
 
   const [selectedImage, setSelectedImage] = useState(null);
@@ -61,6 +71,9 @@ const FindFaces = () => {
       }
     } catch (err) {
       setIsLoading(false);
+      toast.show({
+        description: "Something went wrong, please try again.",
+      });
       console.log(err);
     }
   };

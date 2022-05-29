@@ -106,7 +106,7 @@ const FaceDetailsCard = ({ item: face, index }) => {
   }
   const hairTextComponent = <Text style={styles.body}>{"Hair: " + color}</Text>;
 
-  const addFaceHandler = async (facename) => {
+  const addFaceHandler = async (facename, toast) => {
     const uri = face.cropData.uri;
 
     // obtaining the filename from uri
@@ -116,10 +116,13 @@ const FaceDetailsCard = ({ item: face, index }) => {
       try {
         setIsLoading(true);
         await addFaceToPersonGroup({ filename, uri }, facename, false);
-        // toast.show({ description: "Face will be added shortly." });
         setIsLoading(false);
+        toast.show({ description: "Person has been added to your group." });
       } catch (err) {
         setIsLoading(false);
+        toast.show({
+          description: "Something went wrong, please try again.",
+        });
         console.log(err);
       }
     }
@@ -142,8 +145,6 @@ const FaceDetailsCard = ({ item: face, index }) => {
       {hairTextComponent}
 
       <AddFaceForm containerPaddingY={1} onAddFace={addFaceHandler} />
-
-      
     </Flex>
   );
 };
