@@ -42,7 +42,7 @@
   - Select an image and get a text-based description of it.
 
   <p align="center">
-    <img src="readmeContent/visualize-image.jpg" alt="Logo" height="500">
+    <img src="readmeContent/visualize-image.jpg" alt="Logo" height="600">
   </p>
 
 - **Detect People from an image** -
@@ -51,9 +51,9 @@
   - Find people in an image from your group.
 
   <p float="left" align="middle">
-    <img src="readmeContent/add-people.jpg" alt="Logo" height="500">
+    <img src="readmeContent/add-people.jpg" alt="Logo" height="600">
     &nbsp;
-    <img src="readmeContent/find-people.jpg" alt="Logo" height="500">
+    <img src="readmeContent/find-people.jpg" alt="Logo" height="600">
   </p>
 
 ## Getting Started
