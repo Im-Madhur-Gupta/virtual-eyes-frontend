@@ -58,7 +58,7 @@
 
 ## Getting Started
 
-You can run a local build of Virtual Eyes on your Android phone, follow the below steps to do so or you may download the latest build apk from releases section.
+You can run a local build of Virtual Eyes on your Android phone, follow the below steps to do so or you may download the latest build apk from [releases](https://github.com/Im-Madhur-Gupta/virtual-eyes-frontend/releases/) section.
 
 ### Prerequisites
 
@@ -73,6 +73,9 @@ You can run a local build of Virtual Eyes on your Android phone, follow the belo
 2. ```yarn add -g expo-cli```
 3. ```yarn```
 4. ```expo run:android```
+
+## Usage
+https://user-images.githubusercontent.com/76112446/175405739-8884cd55-4ce8-4148-8cd4-5c19084d47c6.mp4
 
 ## Future Plans
 
