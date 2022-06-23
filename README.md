@@ -1,12 +1,22 @@
-<h1 align="center">Virtual Eyes</h3>
-<p align="center">
+<h1 align="center">Virtual Eyes</h1>
+<h3 align="center">
     A pair of eyes for those who can't see.
-</p>
+</h3>
 <div align="center">
-    <img src="readmeContent/splash.gif" alt="Logo" height="500">
+    <img src="readmeContent/splash.gif" alt="Logo" height="600">
 </div>
+&nbsp;
 
-## About The App
+<p align="center">
+  <a href="https://github.com/Im-Madhur-Gupta/virtual-eyes-frontend/commits/">
+    <img src="https://img.shields.io/github/last-commit/Im-Madhur-Gupta/virtual-eyes-frontend?style=for-the-badge">
+  </a>
+  <a href="https://github.com/Im-Madhur-Gupta/virtual-eyes-frontend/releases">
+    <img src="https://img.shields.io/github/v/release/Im-Madhur-Gupta/virtual-eyes-frontend?style=for-the-badge">
+  </a>
+</p>
+
+<h2>About The App</h2>
 
 - Virtual Eyes is a small gesture from my side in making images _visible_ to the blind people.
 - It does the following -
@@ -15,7 +25,7 @@
 - It was made keeping in mind the needs of blind people and it is Google Talkback friendly.
 - It utilizes Azure Cloud Service for face recognition and image visualization.
 
-### Tech Stack
+<h3>Tech Stack</h3>
 
 - React Native
 - NodeJS
@@ -25,15 +35,15 @@
   - Azure Computer Vision
   - Azure App Service
 
-### Features
+<h3>Features</h3>
 
 - **Visualize an Image** -
 
   - Select an image and get a text-based description of it.
 
-  <div align="center">
+  <p align="center">
     <img src="readmeContent/visualize-image.jpg" alt="Logo" height="500">
-  </div>
+  </p>
 
 - **Detect People from an image** -
 
@@ -42,6 +52,7 @@
 
   <p float="left" align="middle">
     <img src="readmeContent/add-people.jpg" alt="Logo" height="500">
+    &nbsp;
     <img src="readmeContent/find-people.jpg" alt="Logo" height="500">
   </p>
 
@@ -51,25 +62,17 @@ You can run a local build of Virtual Eyes on your Android phone, follow the belo
 
 ### Prerequisites
 
+- You should have [`NodeJS`](https://nodejs.org/en/) and [`yarn`](https://yarnpkg.com/) installed on your computer.
 - You should have an Android Device connected to your computer with adb drivers installed and USB debugging turned on.
-- You should have [`NodeJS`](https://nodejs.org/en/) and `yarn` installed on your computer.
 
   [Follow the expo documentation in case of issues.](https://docs.expo.dev/get-started/installation/)
 
 ### Installation
 
-1. ```sh
-   cd ./virtual-eyes-frontend
-   ```
-2. ```sh
-   yarn add -g expo-cli
-   ```
-3. ```sh
-   yarn
-   ```
-4. ```sh
-   expo run:android
-   ```
+1. ``` cd ./virtual-eyes-frontend ```
+2. ```yarn add -g expo-cli```
+3. ```yarn```
+4. ```expo run:android```
 
 ## Future Plans
 
