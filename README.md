@@ -1,10 +1,11 @@
-<h1 align="center">Virtual Eyes</h1>
+<h1 align="center">Virtual Eyes Frontend</h1>
 <h3 align="center">
     A pair of eyes for those who can't see.
 </h3>
 <div align="center">
-    <img src="readmeContent/splash.gif" alt="Logo" height="600">
+    <img src="https://user-images.githubusercontent.com/76112446/175500297-ab50719d-65a7-470d-a41e-5eef504faa78.gif" alt="Logo" height="600">
 </div>
+
 &nbsp;
 
 <p align="center">
@@ -44,7 +45,7 @@
   - Select an image and get a text-based description of it.
 
   <p align="center">
-    <img src="readmeContent/visualize-image.jpg" alt="Logo" height="600">
+    <img src="https://user-images.githubusercontent.com/76112446/175500560-536f8786-da34-4ee5-8555-a9f1048346f8.jpg" alt="Logo" height="600">
   </p>
 
 - **Detect People from an image** -
@@ -53,9 +54,9 @@
   - Find people in an image from your group.
 
   <p float="left" align="middle">
-    <img src="readmeContent/add-people.jpg" alt="Logo" height="600">
+    <img src="https://user-images.githubusercontent.com/76112446/175500626-8cb2c66f-7af8-43f5-8c6c-b9eb505ca9b2.jpg" alt="Logo" height="600">
     &nbsp;
-    <img src="readmeContent/find-people.jpg" alt="Logo" height="600">
+    <img src="https://user-images.githubusercontent.com/76112446/175500715-de9a29df-0e42-4557-8f29-5aff184cbae6.jpg" alt="Logo" height="600">
   </p>
 
 ## Getting Started
