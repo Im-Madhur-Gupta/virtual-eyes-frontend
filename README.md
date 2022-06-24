@@ -35,6 +35,8 @@
   - Azure Computer Vision
   - Azure App Service
 
+[Link to Backend Repo](https://github.com/Im-Madhur-Gupta/virtual-eyes-backend)
+
 <h3>Features</h3>
 
 - **Visualize an Image** -
@@ -58,7 +60,7 @@
 
 ## Getting Started
 
-You can run a local build of Virtual Eyes on your Android phone, follow the below steps to do so or you may download the latest build apk from [releases](https://github.com/Im-Madhur-Gupta/virtual-eyes-frontend/releases/) section.
+You can run a local build of Virtual Eyes on your Android phone, follow the below steps to do so or you may download the latest build apk from the [releases](https://github.com/Im-Madhur-Gupta/virtual-eyes-frontend/releases/) section.
 
 ### Prerequisites
 
